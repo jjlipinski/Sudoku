@@ -1,0 +1,11 @@
+Easy:
+=====
+https://kjell.haxx.se/sudoku/?action=Create%20a%20field&seed=634101705-v3-35-L1
+
+Medium:
+=======
+https://kjell.haxx.se/sudoku/?action=Create%20a%20field&seed=936271572-v3-26-L1
+
+Hard:
+=====
+https://kjell.haxx.se/sudoku/?action=Create%20a%20field&seed=586906291-v3-20-L1

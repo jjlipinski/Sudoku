@@ -243,6 +243,7 @@ class Sudoku
 						System.out.print(" " + this.sudokuGrid[i][j] + " ");
 					}
 				}
+				// increase the virtical counter
 				counterV++;
 			}
 			// print a horizontal divider after the 3rd and 6th row
@@ -250,6 +251,7 @@ class Sudoku
 			{
 				System.out.println("------------------------------");
 			}
+			// increase the horizontal counter
 			counterH++;
 		}
 	}
@@ -294,26 +296,26 @@ class Sudoku
 				}
 			}	
 		}
-		
 	}
 	
 	/** Save all the col values in an array, then loop through
 	* that array and see if there are 
-	* any duplicate numbers within the array 
+	* any duplicate numbers within the array.
 	*/
 	public void testForRepeatsInCols(int row, int col)
 	{
-		// loop through all the values in this specific row
+		// loop through all the values in this specific col
 		// and save those values to an array
 		String[] temps = new String[9];
 		for(int i = 0; i < 9; i++)
 		{
 			temps[i] = this.sudokuGrid[i][col];
 		}
-		// these 2 strings will be comapred to eachother
+		// these 2 strings will be comapred to each other
 		String s1 = "";
 		String s2 = "";
 		
+		// loop though the temps array
 		for(int j = 0; j < 9; j++)
 		{
 			// this is the value we are going to compare to 
@@ -335,13 +337,12 @@ class Sudoku
 					anyErrorsFound = true;
 				}
 			}	
-		}
-		
+		}	
 	}
 	
 	/** Save all the row values in an array, then loop through
 	* the array and see if there are 
-	* any invalid numbers within the array 
+	* any invalid numbers within the array. 
 	*/
 	public void testForValidCharacters(int row, int col)
 	{
@@ -364,12 +365,10 @@ class Sudoku
 				anyErrorsFound = true;
 			}
 		}
-		
-		
 	}
 	
 	/** If you complete the puzzel, this congratulatory message
-	* will appear :)
+	* will appear. :)
 	*/
 	public static void congratulationsMessage()
 	{
@@ -386,7 +385,7 @@ class Sudoku
 	}
 	
 	/** Print the opening message that asks you what difficulty puzzle
-	* you want to play and retrieve yur answer. If you enter an invalid 
+	* you want to play and retrieve your answer. If you enter an invalid 
 	* respsonse, you will be prompted again.
 	*/
 	public void printOpening()
@@ -398,23 +397,24 @@ class Sudoku
 		System.out.println("Choose a Difficulty: Easy(e), Medium(m), Hard(h)");
 		
 		
-		// keep asking for a difficulty unitl proper input is entered
+		// keep asking for a difficulty input unitl proper input is entered
 		do
 		{
 			System.out.print("Difficulty: ");
 			this.userInputDifficulty = s.nextLine();
-		}while(!this.userInputDifficulty.equals("e") && !this.userInputDifficulty.equals("m") && !this.userInputDifficulty.equals("h") 
-			&& !this.userInputDifficulty.equals("q"));
+		}while(!this.userInputDifficulty.equals("e") && !this.userInputDifficulty.equals("m") && 
+			!this.userInputDifficulty.equals("h") && !this.userInputDifficulty.equals("q"));
 	}
 	
 	
 	/** Assume there are no errors in the grid by
-	* assigning each row col value to be flase
+	* assigning each row col value in the "isThisADuplicate" and the 
+	* "isThisInvalid" array to be false
 	*/
 	public void resetErrorGrid()
 	{
 		// assume there are no errors
-		// by setting this whole error checking 2D array to "no"'
+		// by setting  the "isThisADuplicate" and "isThisInvalid" array to false
 		for(int i = 0; i < 9; i++)
 		{
 			for(int y = 0; y < 9; y++)
@@ -425,13 +425,13 @@ class Sudoku
 		}
 	}
 	
-	/** Get user input, if the input isnt in the right format, ask again
+	/** Get user input, if the input is not in the right format, ask again.
 	*/
 	public void getUserInput()
 	{
 		int counter = 0;
 		
-		// keep asking for user input if it isnt the right format
+		// keep asking for user input if it is not in the right format
 		do
 		{
 			if(counter > 0)
@@ -441,7 +441,8 @@ class Sudoku
 			System.out.print("Set: ");
 			this.userInput = s.nextLine();
 			counter++;
-		}while((this.userInput.length() != maxInputLength) && !(this.userInput.equals("q")) && !(this.userInput.equals("c")));
+		}while((this.userInput.length() != maxInputLength) && !(this.userInput.equals("q")) 
+			&& !(this.userInput.equals("c")));
 		
 	}
 	
@@ -460,7 +461,8 @@ class Sudoku
 		// this will hold the value
 		u.value = answerToken[0];
 		// we will subtract 1 from the row/col values to make them zero based
-		// the will hold the row value
+		
+		// this will hold the row value
 		u.row = Integer.parseInt(answerToken[1]) - 1;
 		// this will hold the col value
 		u.col = Integer.parseInt(answerToken[2]) - 1;
@@ -468,18 +470,19 @@ class Sudoku
 		return u;
 	}
 	
-	/** Check that the user input is valid, ex: #,row,col
+	/** Check that the user input is valid, ex: #,row,col.
 	*/
 	public void checkUserInputFormat()
 	{
 		// if the input is 5 characters long, check to make sure there are separated 
-		// characters. We dont want an input like this: 22222
+		// characters. We do not want an input like this: 22222
 		while(this.userInput.charAt(1) != ',' && this.userInput.charAt(3) != ',')
 		{
 			System.out.println(ANSI_RED + "Input Error!" + ANSI_RESET);
+			// ask again for input
 			System.out.print("Set: ");
 			this.userInput = s.nextLine();
-			// once we get the next group of inputs, dont check again if they
+			// once we get the next group of inputs, do not check again if they
 			// are the check and quit commands
 			if(this.userInput.equals("c") || this.userInput.equals("q"))
 			{
@@ -494,7 +497,7 @@ class Sudoku
 	
     public static void main(String args[]) 
     { 	
-		// use this object to call all the methods
+		// use this object to call all the sudoku methods
 		Sudoku s = new Sudoku();
 		
 		// print the opening banner
@@ -526,13 +529,12 @@ class Sudoku
 		s.setGrid();
 		
 		//before we do anything, assume there are no errors
-		// by setting this whole error checking grid
 		s.resetErrorGrid();
 		
 		// print the grid
 		s.printGrid();
 		
-		// while there are errors that were found in the grid
+		// while there are errors found in the grid
 		do
 		{
 			// before each new iteration, reset the color patterns
@@ -561,8 +563,9 @@ class Sudoku
 				return;
 			}
 			
-			// while the user still wants to enter in numbers to the grid
-			// (the user will enter a d to signal they want to check their answers)
+			// while the user still wants to enter in numbers to the grid...
+			// (the user will enter a "c" to signal they want to check their answers
+			// or a "q" when they are done)
 			while(!(s.userInput.equals("c")))
 			{
 				// if we have 5 characters, make sure they have ,'s for when we parse
@@ -581,7 +584,7 @@ class Sudoku
 				// split the user input in to a #/row/col format
 				UserInput lastUserInput = s.splitUserInput();
 				
-				// add this new character to the bord
+				// add this new characters to the bord
 				s.sudokuGrid[lastUserInput.row][lastUserInput.col] = lastUserInput.value;
 				
 				// add a space
@@ -600,6 +603,7 @@ class Sudoku
 				}
 			}
 			// since the user entered 'q' we must check the user's answer
+			
 			// test for row repeats
 			for(int i = 0; i < 9; i++)
 			{
@@ -615,6 +619,7 @@ class Sudoku
 			
 			// print the new grid, with color changes if there were any errors
 			s.printGrid();
+			
 		}while(s.anyErrorsFound);
 		// if there are no errors found, print the congratulations message 
 		congratulationsMessage();
